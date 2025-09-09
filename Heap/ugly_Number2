@@ -1,0 +1,27 @@
+import java.util.*;
+
+class Solution {
+    public int nthUglyNumber(int n) {
+        int[] primes = {2, 3, 5};
+          PriorityQueue<Long> heap = new PriorityQueue<>();
+           Set<Long> seen = new HashSet<>();
+
+        heap.add(1L);
+          seen.add(1L);
+
+          long ugly = 1;
+  
+        for (int i = 0; i < n; i++) {
+              ugly = heap.poll();
+
+            for (int p : primes) {
+                long next = ugly * p;
+                   if (!seen.contains(next)) {
+                    heap.add(next);
+                    seen.add(next);
+                }
+            }
+        }
+        return (int) ugly;
+    }
+}

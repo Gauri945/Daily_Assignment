@@ -1,0 +1,31 @@
+import java.util.*;
+
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        // Max-Heap  [distance, index]
+        PriorityQueue<int[]> maxHeap = new PriorityQueue<>(
+            (a, b) -> Integer.compare(b[0], a[0]) 
+        );
+
+        for (int i = 0; i < points.length; i++) {
+            int x = points[i][0];
+            int y = points[i][1];
+            int dist = x * x + y * y;  //square root
+
+            maxHeap.add(new int[]{dist, i});
+
+            if (maxHeap.size() > k) {
+                maxHeap.poll(); 
+            }
+        }
+
+     
+        int[][] res = new int[k][2]; //2 isli kyuki y ques giving
+        int idx = 0;
+        for (int[] entry : maxHeap) {
+            res[idx++] = points[entry[1]];
+        }
+
+        return res;
+    }
+}
