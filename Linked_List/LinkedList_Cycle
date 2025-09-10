@@ -1,0 +1,54 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+      ListNode slow=head;
+      ListNode fast= head;
+
+      while(fast!=null && fast.next!=null){
+        slow=slow.next;
+        fast=fast.next.next;
+        if(slow==fast){
+            return true;
+        }
+      }
+      return false;
+     
+    }
+}
+
+
+//LINKED_LIST_CYCLE_2 on LEETCODE
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+
+   ListNode slow = head;
+   ListNode fast = head;
+   ListNode temp = head;
+
+   while(fast!=null && fast.next!=null){
+     slow=slow.next;
+     fast=fast.next.next;
+
+     if(slow==fast){
+        while(temp!=slow){
+            temp=temp.next;
+            slow=slow.next;
+        }
+        return temp;
+     }
+   }
+   return null;
+   
+
+    }
+}
